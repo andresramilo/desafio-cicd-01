@@ -58,6 +58,15 @@ jobs:
           dotnet-version: "8.0.300"
       - name: Instalação do Sonarqube Scanner
         run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Debug secrets (tamanho apenas)
+        run: |
+          echo "Tamanho SONAR_HOST_URL: ${#SONAR_HOST_URL}"
+          echo "Tamanho SONAR_TOKEN: ${#SONAR_TOKEN}"
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Build e Analise
         working-directory: ./src
         run: |
